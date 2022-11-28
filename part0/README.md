@@ -40,3 +40,12 @@ note over browser: browser executes the event handler<br/> that renders notes to
 ```
 
 ## 0.6: New note
+A diagram depicting the situation where the user creates a new note using the single page version of the app.
+
+```mermaid
+sequenceDiagram
+browser->>server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+Note over server: server receives the new note as JSON-data
+server-->>browser: Status Code: 201 Created
+Note over browser: browser stays on the same page and<br/> it sends no further HTTP requests
+```
