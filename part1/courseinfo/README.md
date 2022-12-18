@@ -1,3 +1,4 @@
-# Exercises 1.1.-1.2
+# Course Info
 
-Exercise 1.1 is in a earlier commit.
+Exercises 1.1, 1.2, 1.3, 1.4, 1.5.
+Each exercise has its own commit.
