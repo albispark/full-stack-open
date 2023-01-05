@@ -11,11 +11,17 @@ const Button = ({onClick, name}) => (
 )
 
 const StatisticLine = (props) => (
-    <p>{props.name} {props.value}</p>
+  <tbody>
+    <tr>
+        <td>{props.name}</td>
+        <td>{props.value}</td>
+    </tr>
+  </tbody>
 )
 
 const Statistics = (props) => {
   const all = props.good + props.neutral + props.bad
+  const perc = `${props.good / all * 100} %`
 
   if (all === 0) {
     return (
@@ -26,14 +32,14 @@ const Statistics = (props) => {
   }
 
   return (
-      <div>
+      <table>
         <StatisticLine name='good' value={props.good}/>
         <StatisticLine name='neutral' value={props.neutral}/>
         <StatisticLine name='bad' value={props.bad}/>
         <StatisticLine name='all' value={all}/>
         <StatisticLine name='average' value={(props.good - props.bad) / all}/>
-        <StatisticLine name='positive' value={props.good / all * 100} />
-      </div>
+        <StatisticLine name='positive' value={perc} />
+      </table>
     )
 }
 
