@@ -1,5 +1,27 @@
 import { useState } from 'react'
 
+const Filter = ({value, onChange}) => 
+  <div>
+    filter shown with <input value={value} onChange={onChange}/>
+  </div>
+
+const PersonForm = ({addName, newName, handleNameChange, newNumber, handleNumberChange}) => 
+  <form onSubmit={addName}>
+    <div>
+      name: <input value={newName} onChange={handleNameChange}/>
+    </div>
+    <div>
+      number: <input value={newNumber} onChange={handleNumberChange}/>
+    </div>
+    <div>
+      <button type="submit">add</button>
+    </div>
+  </form>
+
+const Persons = ({name, number}) =>
+  <li>{name} {number}</li>
+
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
@@ -15,7 +37,8 @@ const App = () => {
     event.preventDefault()
     const personObject = {
       name: newName,
-      number: newNumber
+      number: newNumber,
+      id: persons.length + 1
     }
 
     if(persons.includes(persons.find(person => person.name === newName))) {
@@ -40,27 +63,23 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-          filter shown with <input value={newSearch} onChange={handleSearchChange}/>
-      </div>
+      <Filter value={newSearch} onChange={handleSearchChange} />
       <h2>add a new</h2>
-      <form onSubmit={addName}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm 
+        addName={addName} 
+        newName={newName} 
+        handleNameChange={handleNameChange} 
+        newNumber={newNumber} 
+        handleNumberChange={handleNumberChange}
+      />
+
       <h2>Numbers</h2>
       <ul>
         {personToShow.map(person => 
-          <li key={person.name}>{person.name} {person.number}</li>
+          <Persons key={person.id} name={person.name} number={person.number} />
         )}
       </ul>
+
     </div>
   )
 }
